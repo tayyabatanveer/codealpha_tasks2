@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Registrations</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffefd7; 
+            color: #976678; 
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #e68472; 
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+        .registrations-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .registration-item {
+            margin-bottom: 20px;
+            background-color: #f9ab89; 
+            padding: 15px;
+            border: 2px solid #e68472; 
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .registration-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .event-title {
+            color: #3e6670;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .event-actions {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 10px;
+        }
+
+        form {
+            margin: 0;
+        }
+
+        button[type="submit"] {
+            background-color: #d98b58; 
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #e68472; 
+        }
+
+        .back-link {
+            display: block;
+            margin-top: auto;
+            color: #3e6670; 
+            text-decoration: none;
+            font-size: 16px;
+            text-align: center;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>My Registrations</h1>
+    <ul class="registrations-list">
+        {% for registration in registrations %}
+            <li class="registration-item">
+                <a class="event-title" href="{% url 'event_detail' registration.event.id %}">{{ registration.event.title }}</a>
+                <div class="event-actions">
+                    <form method="post" action="{% url 'event_unregister' registration.id %}">
+                        {% csrf_token %}
+                        <button type="submit">Unregister</button>
+                    </form>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+    <a class="back-link" href="{% url 'event_list' %}">Back to Events</a>
+</body>
+</html>

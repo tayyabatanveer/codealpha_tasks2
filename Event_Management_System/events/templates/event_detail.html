@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ event.title }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffefd7; 
+            color: #976678; 
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .event-details {
+            background-color: #f9ab89; 
+            border: 2px solid #e68472; 
+            border-radius: 10px;
+            padding: 20px;
+            max-width: 600px;
+            margin: auto;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 2em;
+            margin-bottom: 10px;
+            color: #e68472; 
+        }
+
+        p {
+            font-size: 1.2em;
+            margin-bottom: 15px;
+        }
+
+        a {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 20px;
+            background-color: #d98b58; 
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        a:hover {
+            background-color: #e68472; 
+        }
+    </style>
+</head>
+<body>
+    <div class="event-details">
+        <h2>{{ event.title }}</h2>
+        <p>{{ event.description }}</p>
+        <p>Date: {{ event.date }}</p>
+        <p>Location: {{ event.location }}</p>
+        <a href="{% url 'event_register' event.id %}">Register for this Event</a>
+        <br>
+        <a href="{% url 'event_list' %}">Back to Events</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffefd7;
+            color: #333; 
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .register-container {
+            background-color: #ffceae; 
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 400px; 
+            width: 90%;
+            margin: auto; 
+        }
+        h1 {
+            color:#e68472; 
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        form {
+            margin-top: 20px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #e68472; 
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .form-group input {
+            width: calc(100% - 22px); 
+            padding: 10px;
+            border: 1px solid #e68472; 
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+        .help-text {
+            font-size: 14px;
+            color: #976678; 
+            margin-top: 5px;
+        }
+        button[type="submit"] {
+            background-color: #f3c9cc;
+            color: #333;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        button[type="submit"]:hover {
+            background-color: #976678; 
+            color: white;
+        }
+        a {
+            color: #3e6670; 
+            text-decoration: none;
+            font-size: 16px;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="register-container">
+        <h1>Register for Eventsphere</h1>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="id_username">Username:</label><br>
+                {{ form.username }}
+            </div>
+            <div class="form-group">
+                <label for="id_password1">Password:</label><br>
+                {{ form.password1 }}
+                <p class="help-text">Your password can’t be too similar to your other personal information. It must contain at least 8 characters, not be a commonly used password, and not be entirely numeric.</p>
+            </div>
+            <div class="form-group">
+                <label for="id_password2">Confirm Password:</label><br>
+                {{ form.password2 }}
+            </div>
+            <button type="submit">Register</button>
+        </form>
+        <p>Already have an account? <a href="{% url 'login' %}">Login here</a></p>
+    </div>
+</body>
+</html>

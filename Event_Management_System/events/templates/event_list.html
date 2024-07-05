@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event List - Eventsphere</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffefd7;
+            color: #976678; 
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        h1 {
+            font-family: 'Pacifico', cursive;
+            font-size: 3em;
+            margin: 20px 0 10px; 
+            color: #976678; 
+            text-align: center;
+            position: relative; 
+        }
+
+        h1::after {
+            content: '';
+            display: block;
+            width: 100%;
+            height: 2px;
+            background-color: #976678; 
+            position: absolute; 
+            bottom: -5px; 
+            left: 0; 
+        }
+
+        h2 {
+            font-size: 2em;
+            margin: 0 0 20px; 
+            color: #e68472; 
+            text-align: center;
+        }
+
+        .event-list {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .event-card {
+            background-color: #f9ab89; 
+            border: 2px solid #e68472; 
+            border-radius: 10px;
+            margin: 10px;
+            padding: 10px; 
+            width: 150px; 
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .event-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .event-title {
+            font-size: 1.2em;
+            color: #3e6670; 
+            text-decoration: none;
+        }
+
+        .event-register, .event-details {
+            display: block;
+            margin-top: 10px;
+            background-color: #e68472; 
+            color: white;
+            padding: 6px 12px; 
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .event-register:hover, .event-details:hover {
+            background-color: #d98b58; 
+        }
+
+        .user-actions {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .user-actions a {
+            margin: 0 10px;
+            padding: 8px 16px; 
+            background-color: #ffceae; 
+            color: #333; 
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .user-actions a:hover {
+            background-color: #f3c9cc;
+        }
+
+        footer {
+            background-color: #f3c9cc; 
+            padding: 10px;
+            text-align: center;
+            margin-top: auto;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <h1>EventSphere</h1>
+    <main>
+        <h2>Upcoming Events</h2>
+        <ul class="event-list">
+            {% for event in events %}
+                <li class="event-card">
+                    <h3 class="event-title">{{ event.title }}</h3>
+                    <a class="event-details" href="{% url 'event_detail' event.id %}">View Details</a>
+                    <a class="event-register" href="{% url 'event_register' event.id %}">Register</a>
+                </li>
+            {% endfor %}
+        </ul>
+        <div class="user-actions">
+            <a href="{% url 'my_registrations' %}">My Registrations</a>
+            <a href="{% url 'logout' %}">Logout</a>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 EventSphere. All rights reserved.</p>
+    </footer>
+</body>
+</html>
